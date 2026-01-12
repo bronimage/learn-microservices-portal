@@ -96,3 +96,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Architectural Boundaries
+
+- DTOs define API contracts (input/output shape)
+- Domain objects enforce business rules
+- Persistence models handle storage concerns
+- Mapping between layers is explicit

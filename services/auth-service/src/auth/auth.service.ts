@@ -3,6 +3,7 @@ import { User } from './domain/user';
 import type { UserRepository } from './domain/repository/user.repository';
 import { USER_REPOSITORY } from './domain/repository/user-repository.token';
 
+// Application service: orchestrates use cases and coordinates domain + persistence
 @Injectable()
 export class AuthService {
   constructor(
