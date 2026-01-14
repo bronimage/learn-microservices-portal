@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, UnauthorizedException } from '@nestjs/common';
 import { User } from './domain/user';
 import type { UserRepository } from './domain/repository/user.repository';
 import { USER_REPOSITORY } from './domain/repository/user-repository.token';
@@ -17,6 +17,12 @@ export class AuthService {
     if (!user) {
       return { success: false, message: 'User not found' };
     }
+
+    if (!user.canLogin()) {
+      throw new UnauthorizedException('User is blocked');
+    }
+
+    // warning - inconsistent in one hand success false in the other exception is thrown.
 
     return { success: true, message: 'Logged in', data: user };
   }
