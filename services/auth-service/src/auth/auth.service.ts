@@ -11,11 +11,11 @@ export class AuthService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<User | null> {
     const user = await this.userRepository.findByUsername(username);
 
     if (!user) {
-      return { success: false, message: 'User not found' };
+      return null;
     }
 
     if (!user.canLogin()) {
@@ -24,7 +24,7 @@ export class AuthService {
 
     // warning - inconsistent in one hand success false in the other exception is thrown.
 
-    return { success: true, message: 'Logged in', data: user };
+    return user;
   }
 
   async register(user: User) {
